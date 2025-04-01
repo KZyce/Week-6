@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 Elements Model in Blender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            position: relative;
+        }
+        .headline {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 24px;
+        }
+        .headline img {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+        }
+        .image-container {
+            position: relative;
+            max-width: 100%;
+        }
+        img {
+            width: 100%;
+            border-radius: 10px;
+            display: none;
+        }
+        img.active {
+            display: block;
+        }
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 30px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .arrow-left {
+            left: 10px;
+        }
+        .arrow-right {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="headline">
+            <img src="images/1-1.png" alt="Thumbnail">
+            3 Elements Model in Blender
+        </h1>
+        <p>Use the arrows to navigate through the dashboard images.</p>
+       
+        <div class="image-container">
+            <span class="arrow arrow-left" onclick="prevImage()">&#9665;</span>
+            <img src="images/1.png" class="active">
+            <img src="images/1-1.png">
+            <img src="images/2-3.png">
+            <img src="images/3-1.png">
+            <img src="images/3.png">
+            <img src="images/2-2.png">
+            <img src="images/2-1.png">
+            <span class="arrow arrow-right" onclick="nextImage()">&#9655;</span>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let currentIndex = 0;
+            const images = document.querySelectorAll(".image-container img");
+
+            function showImage(index) {
+                images.forEach(img => img.classList.remove("active"));
+                images[index].classList.add("active");
+            }
+
+            window.prevImage = function () {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                showImage(currentIndex);
+            };
+
+            window.nextImage = function () {
+                currentIndex = (currentIndex + 1) % images.length;
+                showImage(currentIndex);
+            };
+        });
+    </script>
+</body>
+</html>
